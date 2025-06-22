@@ -1,0 +1,16 @@
+name: "Proselint Markdown Linter"
+description: "Run proselint on all .md files"
+inputs: {}
+runs:
+  using: "composite"
+  steps:
+    - name: Install proselint
+      run: pip install proselint
+
+    - name: Run proselint on markdown files
+      run: |
+        shopt -s globstar
+        for file in **/*.md; do
+          echo "Checking \$file"
+          proselint "\$file"
+        done
